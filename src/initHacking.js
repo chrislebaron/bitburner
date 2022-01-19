@@ -1,15 +1,15 @@
 const baseUrl = 'https://raw.githubusercontent.com/chrislebaron/bitburner/master/src/'
 const filesToDownload = [
-  'common.ns',
-  'mainHack.ns',
-  'spider.ns',
-  'grow.ns',
-  'hack.ns',
-  'weaken.ns',
-  'playerServers.ns',
-  'killAll.ns',
-  'runHacking.ns',
-  'find.ns',
+  'common.js',
+  'mainHack.js',
+  'spider.js',
+  'grow.js',
+  'hack.js',
+  'weaken.js',
+  'playerServers.js',
+  'killAll.js',
+  'runHacking.js',
+  'find.js',
 ]
 const valuesToRemove = ['BB_SERVER_MAP']
 
