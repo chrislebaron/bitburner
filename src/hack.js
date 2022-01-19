@@ -9,7 +9,7 @@ export async function main(ns) {
 
   ns.print(`Starting operation: hack on ${target} in ${threads} threads`)
   const hackAmountEarned = await ns.hack(target, { threads, stock: true })
-  const message = `Successfully hacked ${server.name} and earned ${ns.nFormat(hackAmountEarned, "$0.000a")}`
+  const message = `Successfully hacked ${target} and earned ${ns.nFormat(hackAmountEarned, "$0.000a")}`
   ns.tprint(message)
   ns.toast(message, 'success', 60000)
   ns.exit()
