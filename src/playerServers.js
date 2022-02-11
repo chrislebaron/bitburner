@@ -2,8 +2,8 @@ const settings = {
   maxPlayerServers: 25,
   gbRamCost: 55000,
   maxGbRam: 1048576,
-  minGbRam: 64,
-  totalMoneyAllocation: 0.25,
+  minGbRam: 16,
+  totalMoneyAllocation: 0.75,
   actions: {
     BUY: 'buy',
     UPGRADE: 'upgrade',
@@ -95,6 +95,7 @@ export async function main(ns) {
   }
 
   while (true) {
+    ns.print('')
     let didChange = false
 
     const serverMap = getItem(settings.keys.serverMap)
@@ -117,7 +118,12 @@ export async function main(ns) {
       targetRam = Math.max(settings.minGbRam, targetRam)
       targetRam = Math.min(targetRam, settings.maxGbRam)
 
-      if (ns.getServerMoneyAvailable('home') * settings.totalMoneyAllocation >= targetRam * settings.gbRamCost) {
+      const targetServerCost = targetRam * settings.gbRamCost
+      const homeMoneyAvailable = ns.getServerMoneyAvailable('home')
+      const serverBuyingFunds = homeMoneyAvailable * settings.totalMoneyAllocation
+      ns.print(`Target Server Cost: ${ns.nFormat(targetServerCost, "$0.000a")}. Money available: ${ns.nFormat(serverBuyingFunds, "$0.000a")}`)
+
+      if (serverBuyingFunds >= targetServerCost) {
         let hostname = `pserv-${targetRam}-${createUUID()}`
         hostname = ns.purchaseServer(hostname, targetRam)
 
