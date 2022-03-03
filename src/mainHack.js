@@ -151,6 +151,8 @@ function findTargetServer(ns, serversList, servers, serverExtraData) {
 export async function main(ns) {
   ns.tprint(`[${localeHHMMSS()}] Starting mainHack.js`)
 
+  const hackserver = ns.args[0]
+
   let hostname = ns.getHostname()
 
   if (hostname !== 'home') {
@@ -175,7 +177,8 @@ export async function main(ns) {
     const vulnerableServers = await getHackableServers(ns, serverMap.servers)
 
     const targetServers = findTargetServer(ns, vulnerableServers, serverMap.servers, serverExtraData)
-    const bestTarget = targetServers.shift()
+    let bestTarget = targetServers.shift()
+    if(hackserver) bestTarget = hackserver
     const hackTime = ns.getHackTime(bestTarget)
     const growTime = ns.getGrowTime(bestTarget)
     const weakenTime = ns.getWeakenTime(bestTarget)
